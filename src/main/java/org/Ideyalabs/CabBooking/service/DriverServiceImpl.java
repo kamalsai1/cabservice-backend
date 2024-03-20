@@ -1,13 +1,10 @@
 package org.Ideyalabs.CabBooking.service;
 
 import lombok.SneakyThrows;
-import org.Ideyalabs.CabBooking.dto.CustomerDto;
-import org.Ideyalabs.CabBooking.dto.UserDTO;
+import org.Ideyalabs.CabBooking.dto.DriverDto;
 import org.Ideyalabs.CabBooking.exception.CustomerByIdDoesNotExistException;
-import org.Ideyalabs.CabBooking.exception.UserByIdDoesNotExistException;
-import org.Ideyalabs.CabBooking.model.Customer;
-import org.Ideyalabs.CabBooking.model.User;
-import org.Ideyalabs.CabBooking.repository.CustomerRepository;
+import org.Ideyalabs.CabBooking.model.Driver;
+import org.Ideyalabs.CabBooking.repository.DriverRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,39 +15,39 @@ import java.util.stream.Collectors;
 
 @Service
 
-public class CustomerServiceImpl implements CustomerService{
+public class DriverServiceImpl implements DriverService {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private CustomerRepository customerRepository;
+    private DriverRepository driverRepository;
     @Override
-    public CustomerDto addCustomer(CustomerDto customerDto) {
-        Customer customer = modelMapper.map(customerDto, Customer.class);
-        return modelMapper.map(customerRepository.save(customer), CustomerDto.class);
+    public DriverDto addCustomer(DriverDto driverDto) {
+        Driver driver = modelMapper.map(driverDto, Driver.class);
+        return modelMapper.map(driverRepository.save(driver), DriverDto.class);
     }
 
     @Override
-    public List<CustomerDto> getAllCustomers() {
-         List<CustomerDto> customerList = customerRepository.findAll()
-                .stream().map(e->modelMapper.map(e,CustomerDto.class)).collect(Collectors.toList());
+    public List<DriverDto> getAllCustomers() {
+         List<DriverDto> customerList = driverRepository.findAll()
+                .stream().map(e->modelMapper.map(e, DriverDto.class)).collect(Collectors.toList());
         return customerList;
     }
 
     @SneakyThrows
     @Override
-    public CustomerDto getCustomerById(int customerId) {
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+    public DriverDto getCustomerById(int customerId) {
+        Optional<Driver> customerOptional = driverRepository.findById(customerId);
         if(customerOptional.isEmpty()){
             throw new CustomerByIdDoesNotExistException("Customer id not found");
         }
-        return modelMapper.map(customerOptional.get(), CustomerDto.class);
+        return modelMapper.map(customerOptional.get(), DriverDto.class);
     }
 
     @Override
     public String deleteCustomerById(int customerId) {
-        boolean DeleteUser = customerRepository.existsById(customerId);
+        boolean DeleteUser = driverRepository.existsById(customerId);
         if(DeleteUser){
-            customerRepository.deleteById(customerId);
+            driverRepository.deleteById(customerId);
             return "User id " + customerId + " deleted successfully";
         }
         return "User  id"+" "+customerId+" does not exists in the db";

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Customer {
+public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;

@@ -1,15 +1,15 @@
 package org.Ideyalabs.CabBooking.service;
 
-import org.Ideyalabs.CabBooking.dto.CustomerDto;
+import org.Ideyalabs.CabBooking.dto.DriverDto;
 
 import java.util.List;
 
-public interface CustomerService {
-    public CustomerDto addCustomer(CustomerDto customerDto);
+public interface DriverService {
+    public DriverDto addCustomer(DriverDto driverDto);
 
-    public List<CustomerDto> getAllCustomers();
+    public List<DriverDto> getAllCustomers();
 
-  public   CustomerDto getCustomerById(int customerId);
+  public DriverDto getCustomerById(int customerId);
 
    public String deleteCustomerById(int customerId);
 }
