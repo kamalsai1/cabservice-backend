@@ -21,35 +21,35 @@ public class DriverServiceImpl implements DriverService {
     @Autowired
     private DriverRepository driverRepository;
     @Override
-    public DriverDto addCustomer(DriverDto driverDto) {
+    public DriverDto addDriver(DriverDto driverDto) {
         Driver driver = modelMapper.map(driverDto, Driver.class);
         return modelMapper.map(driverRepository.save(driver), DriverDto.class);
     }
 
     @Override
-    public List<DriverDto> getAllCustomers() {
-         List<DriverDto> customerList = driverRepository.findAll()
+    public List<DriverDto> getAllDrivers() {
+         List<DriverDto> driverDtoList = driverRepository.findAll()
                 .stream().map(e->modelMapper.map(e, DriverDto.class)).collect(Collectors.toList());
-        return customerList;
+        return driverDtoList;
     }
 
     @SneakyThrows
     @Override
-    public DriverDto getCustomerById(int customerId) {
-        Optional<Driver> customerOptional = driverRepository.findById(customerId);
-        if(customerOptional.isEmpty()){
+    public DriverDto getDriverById(int driverId) {
+        Optional<Driver> driverOptional = driverRepository.findById(driverId);
+        if(driverOptional.isEmpty()){
             throw new CustomerByIdDoesNotExistException("Customer id not found");
         }
-        return modelMapper.map(customerOptional.get(), DriverDto.class);
+        return modelMapper.map(driverOptional.get(), DriverDto.class);
     }
 
     @Override
-    public String deleteCustomerById(int customerId) {
-        boolean DeleteUser = driverRepository.existsById(customerId);
+    public String deleteDriverById(int driverId) {
+        boolean DeleteUser = driverRepository.existsById(driverId);
         if(DeleteUser){
-            driverRepository.deleteById(customerId);
-            return "User id " + customerId + " deleted successfully";
+            driverRepository.deleteById(driverId);
+            return "User id " + driverId + " deleted successfully";
         }
-        return "User  id"+" "+customerId+" does not exists in the db";
+        return "User  id"+" "+driverId+" does not exists in the db";
     }
 }

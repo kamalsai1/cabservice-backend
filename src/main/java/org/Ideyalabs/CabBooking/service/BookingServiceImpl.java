@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.Ideyalabs.CabBooking.model.Booking;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class BookingServiceImpl implements BookingService{
     @Autowired
     private ModelMapper modelMapper;

@@ -4,5 +4,5 @@ import org.Ideyalabs.CabBooking.dto.BookingDTO;
 import org.Ideyalabs.CabBooking.repository.BookingRepository;
 
 public interface BookingService {
-    BookingDTO createBooking(BookingDTO bookingDTO);
+    public  BookingDTO createBooking(BookingDTO bookingDTO);
 }

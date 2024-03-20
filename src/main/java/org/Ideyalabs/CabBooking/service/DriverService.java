@@ -5,11 +5,11 @@ import org.Ideyalabs.CabBooking.dto.DriverDto;
 import java.util.List;
 
 public interface DriverService {
-    public DriverDto addCustomer(DriverDto driverDto);
+    public DriverDto addDriver(DriverDto driverDto);
 
-    public List<DriverDto> getAllCustomers();
+    public List<DriverDto> getAllDrivers();
 
-  public DriverDto getCustomerById(int customerId);
+  public DriverDto getDriverById(int driverId);
 
-   public String deleteCustomerById(int customerId);
+   public String deleteDriverById(int driverId);
 }

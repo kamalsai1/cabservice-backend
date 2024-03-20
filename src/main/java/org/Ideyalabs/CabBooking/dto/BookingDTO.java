@@ -9,8 +9,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class BookingDTO {
     @NotEmpty(message = "Customer Name cannot be empty")
     private String userName;

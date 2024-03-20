@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DriverDto {
-    @NotBlank(message = "Customer Name cannot be empty")
+    @NotBlank(message = "Driver Name cannot be empty")
     private String driverName;
     @NotBlank(message = "Password is mandatory")
     private String driverPassword;

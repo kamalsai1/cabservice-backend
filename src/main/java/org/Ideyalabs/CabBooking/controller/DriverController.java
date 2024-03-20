@@ -14,24 +14,24 @@ public class DriverController {
     private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
     @Autowired
     private DriverService driverService;
-    @PostMapping("/customers")
-    public DriverDto addCustomer(@RequestBody DriverDto driverDto){
+    @PostMapping("/drivers")
+    public DriverDto addDriver(@RequestBody DriverDto driverDto){
         logger.info("Creating driver for user: {} ", driverDto.getDriverName());
-        return driverService.addCustomer(driverDto);
+        return driverService.addDriver(driverDto);
     }
-    @GetMapping("/customers")
-    public List<DriverDto> getAllCustomers(){
+    @GetMapping("/drivers")
+    public List<DriverDto> getAllDrivers(){
         logger.info("Retrieving all drivers");
-        return driverService.getAllCustomers();
+        return driverService.getAllDrivers();
     }
-    @GetMapping("/customers/{customerId}")
-    public DriverDto getCustomerById(@PathVariable("driverId") int driverId){
+    @GetMapping("/drivers/{driverId}")
+    public DriverDto getDriverById(@PathVariable("driverId") int driverId){
         logger.info("Retrieving driver by id: {} ", driverId);
-        return driverService.getCustomerById(driverId);
+        return driverService.getDriverById(driverId);
     }
-    @DeleteMapping("/customers/{customerId}")
-    public String deleteCustomerById(@PathVariable("driverId") int driverId){
+    @DeleteMapping("/drivers/{driverId}")
+    public String deleteDriverById(@PathVariable("driverId") int driverId){
         logger.info("Deleting driver by id: {} ", driverId);
-        return driverService.deleteCustomerById(driverId);
+        return driverService.deleteDriverById(driverId);
     }
 }

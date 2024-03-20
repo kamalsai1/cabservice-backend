@@ -12,12 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Driver {
+public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int driverId;
-    private String driverName;
-    private String driverPassword;
-    private String driverEmail;
-    private String driverNumber;
+    private int managerId;
+    private  String managerName;
+    private String managerEmail;
+    private String managerPhone;
 }
