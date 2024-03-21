@@ -20,8 +20,8 @@ public class User {
     private String password;
     private String email;
     private String phone;
-    @OneToMany(mappedBy = "user")
-    private List<Booking> bookings;
+    @OneToOne(mappedBy = "user")
+    private Booking bookings;
     private String role;
 
 }
