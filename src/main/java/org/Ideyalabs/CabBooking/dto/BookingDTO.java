@@ -11,7 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 public class BookingDTO {
     @NotEmpty(message = "Customer Name cannot be empty")
-    private String userName;
+    private String username;
+    private String driverName;
     @NotEmpty(message = "Driver Name cannot be empty")
     private String pickUpLocation;
     @NotBlank(message = "Destination cannot be null")

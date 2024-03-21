@@ -1,5 +1,7 @@
 package org.Ideyalabs.CabBooking.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.Ideyalabs.CabBooking.dto.BookingDTO;
 import org.Ideyalabs.CabBooking.service.BookingService;
 import org.slf4j.Logger;
@@ -21,8 +23,8 @@ public class BookingController {
 //        return bookingService.createBooking(bookingDTO);
 //    }
     @PostMapping("/book")
-    public ResponseEntity<String> bookDriver(@RequestParam int userid, @RequestParam int driverId) {
-        bookingService.bookDriver(userid, driverId);
+    public ResponseEntity<String> bookDriver(@RequestBody BookingDTO booking) {
+        bookingService.bookDriver(booking);
         return ResponseEntity.ok("Booking successful");
     }
 }

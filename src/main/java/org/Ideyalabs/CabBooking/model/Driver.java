@@ -19,6 +19,6 @@ public class Driver {
     private String driverPassword;
     private String driverEmail;
     private String driverNumber;
-    @OneToMany(mappedBy = "driver")
-    private List<Booking> bookings;
+    @OneToOne(mappedBy = "driver")
+    private Booking bookings;
 }
