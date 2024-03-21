@@ -22,5 +22,6 @@ public class User {
     private String phone;
     @OneToMany(mappedBy = "user")
     private List<Booking> bookings;
+    private String role;
 
 }

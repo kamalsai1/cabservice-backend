@@ -2,6 +2,7 @@ package org.Ideyalabs.CabBooking.service;
 
 
 import lombok.SneakyThrows;
+import org.Ideyalabs.CabBooking.dto.BookingDTO;
 import org.Ideyalabs.CabBooking.dto.UserDTO;
 import org.Ideyalabs.CabBooking.exception.UpdateUserByIdDoesNotExistException;
 import org.Ideyalabs.CabBooking.exception.UserByIdDoesNotExistException;
@@ -21,11 +22,7 @@ public class UserServiceImplementation implements UserService {
     private ModelMapper modelMapper;
     @Autowired
     private UserRepository userRepository;
-    @Override
-    public UserDTO createUser(UserDTO userDto) {
-        User user =  modelMapper.map(userDto, User.class);
-        return modelMapper.map(userRepository.save(user),UserDTO.class);
-    }
+
 
     @Override
     public List<UserDTO> getAllUsers() {
@@ -75,5 +72,22 @@ public class UserServiceImplementation implements UserService {
         }
         return "User  id"+" "+userid+" does not exists in the db";
     }
+
+    @Override
+    public String loginUser(UserDTO userDTO) {
+        List<User> user = userRepository.findAll();
+        for(User u : user){
+            if(u.getUsername().equals(userDTO.getUsername()) && u.getPassword().equals(userDTO.getPassword())){
+                return "Login Successful";
+            }
+        }
+        return "Login Unsuccessful";
+    }
+
+    @Override
+    public BookingDTO bookCab(UserDTO userDTO) {
+        return null;
+    }
+
 }
 

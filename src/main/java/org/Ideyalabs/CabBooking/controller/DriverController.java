@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("driver-api/v1")
 public class DriverController {
     private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
     @Autowired

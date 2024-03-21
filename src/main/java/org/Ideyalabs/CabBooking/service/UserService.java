@@ -1,6 +1,7 @@
 package org.Ideyalabs.CabBooking.service;
 
 
+import org.Ideyalabs.CabBooking.dto.BookingDTO;
 import org.Ideyalabs.CabBooking.dto.UserDTO;
 import org.Ideyalabs.CabBooking.exception.UpdateUserByIdDoesNotExistException;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
 
-    public  UserDTO createUser(UserDTO userDto);
+
 
    public List<UserDTO> getAllUsers();
 
@@ -18,5 +19,9 @@ public interface UserService {
     public void updateUserById(int userid, UserDTO userDTO);
 
     public  String deleteUserById(int userid);
+
+    public String loginUser(UserDTO userDTO);
+
+    BookingDTO bookCab(UserDTO userDTO);
 }
 
