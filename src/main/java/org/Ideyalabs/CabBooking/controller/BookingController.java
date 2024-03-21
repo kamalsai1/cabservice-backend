@@ -5,8 +5,10 @@ import org.Ideyalabs.CabBooking.service.BookingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,9 +17,14 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @PostMapping("/bookings")
-    public BookingDTO createBooking(@RequestBody BookingDTO bookingDTO){
-        logger.info("Creating booking for user: {} ", bookingDTO.getUserName());
-        return bookingService.createBooking(bookingDTO);
+//    @PostMapping("/bookings")
+//    public BookingDTO createBooking(@RequestBody BookingDTO bookingDTO){
+//        logger.info("Creating booking for user: {} ", bookingDTO.getUserName());
+//        return bookingService.createBooking(bookingDTO);
+//    }
+    @PostMapping("/book")
+    public ResponseEntity<String> bookDriver(@RequestParam int userid, @RequestParam int driverId) {
+        bookingService.bookDriver(userid, driverId);
+        return ResponseEntity.ok("Booking successful");
     }
 }
