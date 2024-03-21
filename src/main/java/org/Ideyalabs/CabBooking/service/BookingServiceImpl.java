@@ -1,6 +1,9 @@
 package org.Ideyalabs.CabBooking.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.Ideyalabs.CabBooking.dto.BookingDTO;
 import org.Ideyalabs.CabBooking.model.Driver;
 import org.Ideyalabs.CabBooking.model.User;
 import org.Ideyalabs.CabBooking.repository.BookingRepository;
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.Ideyalabs.CabBooking.model.Booking;
 
 @Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookingServiceImpl implements BookingService{
     @Autowired
     private ModelMapper modelMapper;
@@ -28,17 +33,18 @@ public class BookingServiceImpl implements BookingService{
 //    }
 
     @Override
-    public Booking bookDriver(int userid, int driverId) {
-        User user = userRepository.findById(userid).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        Driver driver = driverRepository.findById(driverId).orElseThrow(() -> new EntityNotFoundException("Driver not found"));
-        Booking booking = new Booking();
-        booking.setUser(user);
-        booking.setDriver(driver);
-        booking.setUserName(booking.getUserName());
-        booking.setPickUpLocation(booking.getPickUpLocation());
-        booking.setDropLocation(booking.getDropLocation());
+    public Booking bookDriver(BookingDTO booking) {
+        User user = userRepository.findByUsername(booking.getUsername()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Driver driver = driverRepository.findByDriverName(booking.getDriverName()).orElseThrow(() -> new EntityNotFoundException("Driver not found"));
+        Booking booking1 = new Booking();
+        booking1.setDriver(driver);
+        booking1.setUser(user);
+        booking1.setUsername(user.getUsername());
+        booking1.setDriverName(driver.getDriverName());
+        booking1.setPickUpLocation(booking.getPickUpLocation());
+        booking1.setDropLocation(booking.getDropLocation());
 
-        return bookingRepository.save(booking);
+        return bookingRepository.save(booking1);
     }
 }
 
