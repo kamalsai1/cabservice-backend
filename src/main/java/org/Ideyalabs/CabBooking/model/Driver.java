@@ -16,8 +16,8 @@ public class Driver {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverId;
     private String driverName;
-    private String driverPassword;
     private String driverEmail;
+    private String driverPassword;
     private String driverNumber;
     @OneToOne(mappedBy = "driver")
     private Booking bookings;

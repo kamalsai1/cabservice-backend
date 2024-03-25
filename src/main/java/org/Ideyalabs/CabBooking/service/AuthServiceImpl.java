@@ -1,10 +1,12 @@
 package org.Ideyalabs.CabBooking.service;
 
-import org.Ideyalabs.CabBooking.dto.JwtRequestDto;
-import org.Ideyalabs.CabBooking.dto.JwtResponseDto;
-import org.Ideyalabs.CabBooking.dto.UserDTO;
-import org.Ideyalabs.CabBooking.jwt.JwtHelper;
+import org.Ideyalabs.CabBooking.dto.*;
+import org.Ideyalabs.CabBooking.jwtCode.JwtHelper;
+import org.Ideyalabs.CabBooking.model.Driver;
+import org.Ideyalabs.CabBooking.model.Manager;
 import org.Ideyalabs.CabBooking.model.User;
+import org.Ideyalabs.CabBooking.repository.DriverRepository;
+import org.Ideyalabs.CabBooking.repository.ManagerRepository;
 import org.Ideyalabs.CabBooking.repository.UserRepository;
 import org.Ideyalabs.CabBooking.security.UserDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -42,6 +44,12 @@ public class AuthServiceImpl implements AuthService{
     @Autowired
     private JwtHelper helper;
 
+    @Autowired
+    private ManagerRepository managerRepository;
+
+    @Autowired
+    private DriverRepository driverRepository;
+
     /*
      * validating the login input parameters and creating token by setting authentication
      */
@@ -72,12 +80,26 @@ public class AuthServiceImpl implements AuthService{
     {
         User user = modelMapper.map(userDto,User.class);
 
-        user.setRole("USER");
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
 
         return modelMapper.map(userRepository.save(user), UserDTO.class);
     }
+
+    @Override
+    public ManagerDto addManager(ManagerDto managerDto) {
+        Manager manager = modelMapper.map(managerDto, Manager.class);
+        manager.setManagerPassword(passwordEncoder.encode(managerDto.getManagerPassword()));
+        return modelMapper.map(managerRepository.save(manager), ManagerDto.class);
+    }
+
+    @Override
+    public DriverDto addDriver(DriverDto driverDto) {
+        Driver driver = modelMapper.map(driverDto, Driver.class);
+        driver.setDriverPassword(passwordEncoder.encode(driverDto.getDriverPassword()));
+        return modelMapper.map(driverRepository.save(driver), DriverDto.class);
+    }
+
+
 
 
 }

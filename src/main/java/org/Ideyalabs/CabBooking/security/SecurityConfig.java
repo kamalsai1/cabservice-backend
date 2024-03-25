@@ -3,9 +3,8 @@ package org.Ideyalabs.CabBooking.security;
 
 
 
-import org.Ideyalabs.CabBooking.jwt.JwtAuthFilter;
-import org.Ideyalabs.CabBooking.jwt.JwtAuthenticationEntryPoint;
-import org.Ideyalabs.CabBooking.security.UserDetailsServiceImpl;
+import org.Ideyalabs.CabBooking.jwtCode.JwtAuthFilter;
+import org.Ideyalabs.CabBooking.jwtCode.JwtAuthenticationEntryPoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +17,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,10 +29,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_URLS={"/auth-api/v1/**","/manager-api/v1","/driver-api/v1","/user-api/v1","/booking-api/v1/**"};
-//    private static final String[] ADMIN_URLS = { "/manager-api/v1","/driver-api/v1","/user-api/v1"};
-//
-//    private static final String[] USER_URLS = {"/booking-api/v1/**"};
+    private static final String[] PUBLIC_URLS={"/auth-api/v1/**"};
+    private static final String[] MANAGER_URLS = { "/manager-api/v1"};
+    private static final String[] DRIVER_URLS = {"/driver-api/v1"};
+
+    private static final String[] USER_URLS = {"/booking-api/v1/**"};
 
     @Autowired
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
@@ -56,7 +55,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PUBLIC_URLS).permitAll()
-//                        .requestMatchers(ADMIN_URLS).hasRole("ADMIN")
+                        .requestMatchers(DRIVER_URLS).hasRole("DRIVER")
+                        .requestMatchers(MANAGER_URLS).hasRole("MANAGER")
+                        .requestMatchers(USER_URLS).hasRole("USER")
 
 
                         .anyRequest().authenticated())

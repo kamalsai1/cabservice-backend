@@ -19,4 +19,5 @@ public class Manager {
     private  String managerName;
     private String managerEmail;
     private String managerPhone;
+    private String managerPassword;
 }

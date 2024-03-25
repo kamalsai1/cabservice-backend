@@ -1,4 +1,4 @@
-package org.Ideyalabs.CabBooking.jwt;
+package org.Ideyalabs.CabBooking.jwtCode;
 
 
 import io.jsonwebtoken.Claims;
