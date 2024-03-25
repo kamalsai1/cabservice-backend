@@ -21,4 +21,10 @@ public class Driver {
     private String driverNumber;
     @OneToOne(mappedBy = "driver")
     private Booking bookings;
+
+    @ManyToOne
+    //Many drivers are assigned to  one Manager
+    // Name of the foreign key column in the Driver table
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 }

@@ -10,8 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingDTO {
-    @NotEmpty(message = "Customer Name cannot be empty")
+    @NotEmpty(message = "Username Name cannot be empty")
     private String username;
+    @NotEmpty(message = "Driver Name cannot be empty")
     private String driverName;
     @NotEmpty(message = "Driver Name cannot be empty")
     private String pickUpLocation;

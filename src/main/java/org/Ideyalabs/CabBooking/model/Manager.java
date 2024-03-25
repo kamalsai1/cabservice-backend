@@ -1,23 +1,25 @@
-package org.Ideyalabs.CabBooking.model;
+    package org.Ideyalabs.CabBooking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+    import jakarta.persistence.*;
+    import lombok.AllArgsConstructor;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-public class Manager {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int managerId;
-    private  String managerName;
-    private String managerEmail;
-    private String managerPhone;
-    private String managerPassword;
-}
+    import java.util.List;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    public class Manager {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int managerId;
+        private  String managerName;
+        private String managerEmail;
+        private String managerPhone;
+        //Here One Manager can assigned to the Many Drivers like D1,D2,B3....etc
+        @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
+        //List of the Drivers for particular Manager
+        private List<Driver> drivers;
+    }
